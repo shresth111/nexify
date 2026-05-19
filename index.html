@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexify Webgrip Services Pvt. Ltd. — Web & AI Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04050f;--bg2:#080c1a;--bg3:#0c1228;
+  --cyan:#00d4ff;--cyan2:#00aacc;
+  --purple:#7c3aed;--purple2:#a855f7;
+  --green:#00ff88;
+  --white:#ffffff;--text:#e8eaf6;--muted:#8892b0;
+  --border:rgba(0,212,255,0.12);--border2:rgba(255,255,255,0.06);
+  --glass:rgba(255,255,255,0.04);--glass2:rgba(0,212,255,0.06);
+  --glow:0 0 40px rgba(0,212,255,0.15);--glow2:0 0 60px rgba(124,58,237,0.2);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7}
+h1,h2,h3,h4{font-family:'Outfit',sans-serif;line-height:1.15}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(124,58,237,0.12) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 100% 80%,rgba(0,212,255,0.08) 0%,transparent 50%);pointer-events:none;z-index:0}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(4,5,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Outfit',sans-serif;font-size:1.25rem;font-weight:800;text-decoration:none;display:flex;align-items:center;gap:0.5rem;color:var(--white)}
+.nav-logo span{color:var(--cyan);text-shadow:0 0 20px rgba(0,212,255,0.6)}
+.logo-dot{width:8px;height:8px;background:var(--cyan);border-radius:50%;box-shadow:0 0 10px var(--cyan);animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.7)}}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:0.88rem;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:0.02em;transition:color 0.2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform 0.2s}
+.nav-links a:hover{color:var(--cyan)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{background:linear-gradient(135deg,var(--cyan),var(--purple2)) !important;color:var(--bg) !important;padding:0.55rem 1.4rem;border-radius:100px;font-weight:700 !important}
+.nav-cta::after{display:none !important}
+
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:7rem 3rem 4rem;gap:3rem;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:0.6rem;background:var(--glass2);border:1px solid var(--border);border-radius:100px;padding:0.35rem 1rem 0.35rem 0.7rem;font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.5rem}
+.tag-dot{width:6px;height:6px;background:var(--cyan);border-radius:50%;box-shadow:0 0 8px var(--cyan);animation:pulse 1.5s infinite}
+.hero-title{font-size:clamp(2.8rem,5vw,5.2rem);font-weight:900;letter-spacing:-0.03em;line-height:1.05;margin-bottom:1.5rem;color:var(--white)}
+.grad-text{background:linear-gradient(135deg,var(--cyan),var(--purple2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.hero-sub{font-size:1rem;color:var(--muted);max-width:480px;line-height:1.8;margin-bottom:2.5rem}
+.hero-btns{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.btn-glow{display:inline-flex;align-items:center;gap:0.5rem;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--bg);padding:0.9rem 2rem;border-radius:100px;font-family:'Outfit',sans-serif;font-size:0.92rem;font-weight:700;text-decoration:none;box-shadow:0 0 30px rgba(0,212,255,0.3);transition:transform 0.2s,box-shadow 0.2s}
+.btn-glow:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(0,212,255,0.5)}
+.btn-outline{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;border:1px solid var(--border);color:var(--text);padding:0.9rem 2rem;border-radius:100px;font-size:0.92rem;font-weight:500;text-decoration:none;transition:border-color 0.2s,color 0.2s}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan)}
+
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+.hero-screen{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:1.8rem;backdrop-filter:blur(10px);width:100%;max-width:420px;box-shadow:var(--glow),0 40px 80px rgba(0,0,0,0.5);position:relative;z-index:2}
+.screen-bar{display:flex;align-items:center;gap:0.5rem;margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid var(--border2)}
+.sdot{width:10px;height:10px;border-radius:50%}
+.sd1{background:#ff5f57}.sd2{background:#ffbd2e}.sd3{background:#28c840}
+.screen-url{font-size:0.78rem;color:var(--muted);margin-left:0.5rem;font-weight:500}
+.metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin-bottom:1.2rem}
+.mbox{background:var(--glass);border:1px solid var(--border2);border-radius:12px;padding:0.9rem;text-align:center}
+.mval{font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:700;color:var(--cyan);text-shadow:0 0 15px rgba(0,212,255,0.4)}
+.mlbl{font-size:0.68rem;color:var(--muted);margin-top:2px;letter-spacing:0.05em}
+.code-blk{background:rgba(0,0,0,0.4);border:1px solid var(--border2);border-radius:10px;padding:1rem;font-family:monospace;font-size:0.78rem;line-height:1.8}
+.ck{color:#c792ea}.cf{color:#82aaff}.cs{color:#c3e88d}.cc{color:#546e7a}
+.float-pill{position:absolute;background:rgba(8,12,26,0.9);border:1px solid var(--border);border-radius:100px;padding:0.6rem 1.2rem;backdrop-filter:blur(10px);display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;box-shadow:var(--glow)}
+.fp1{top:-20px;left:-30px;color:var(--green)}
+.fp2{bottom:-15px;right:-20px;color:var(--purple2)}
+.fpdot{width:8px;height:8px;border-radius:50%;box-shadow:0 0 8px currentColor}
+.fp1 .fpdot{background:var(--green)}
+.fp2 .fpdot{background:var(--purple2)}
+
+.ticker-wrap{overflow:hidden;padding:1rem 0;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1}
+.ticker-track{display:flex;gap:2.5rem;animation:ticker 25s linear infinite;white-space:nowrap;width:max-content}
+.ti{font-family:'Outfit',sans-serif;font-size:0.82rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+.ts{color:var(--cyan);opacity:0.4;margin-left:2.5rem}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+section{padding:6rem 3rem;position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:1rem}
+.eyebrow::before{content:'';display:inline-block;width:20px;height:2px;background:linear-gradient(90deg,var(--cyan),var(--purple2))}
+.sec-title{font-size:clamp(1.8rem,3vw,3rem);font-weight:800;color:var(--white);letter-spacing:-0.02em;margin-bottom:1rem}
+.sec-sub{font-size:0.97rem;color:var(--muted);max-width:560px;line-height:1.8}
+
+#services{background:var(--bg)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-top:3.5rem}
+.svc-card{background:var(--bg2);padding:2.2rem;position:relative;overflow:hidden;transition:background 0.3s;cursor:default}
+.svc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,0.05),transparent);opacity:0;transition:opacity 0.3s}
+.svc-card:hover{background:var(--bg3)}
+.svc-card:hover::before{opacity:1}
+.svc-num{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;color:var(--cyan);opacity:0.5;margin-bottom:1.5rem}
+.svc-icon{width:48px;height:48px;background:var(--glass2);border:1px solid var(--border);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.2rem;transition:box-shadow 0.3s}
+.svc-card:hover .svc-icon{box-shadow:0 0 20px rgba(0,212,255,0.2)}
+.svc-title{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:0.7rem}
+.svc-desc{font-size:0.87rem;color:var(--muted);line-height:1.7}
+.svc-arr{position:absolute;bottom:2rem;right:2rem;font-size:1rem;color:var(--cyan);opacity:0;transform:translate(-4px,4px);transition:all 0.2s}
+.svc-card:hover .svc-arr{opacity:1;transform:translate(0,0)}
+
+#about{background:var(--bg2)}
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-viz{position:relative}
+.about-box{background:var(--bg3);border:1px solid var(--border);border-radius:24px;aspect-ratio:4/5;overflow:hidden;position:relative;box-shadow:var(--glow2)}
+.about-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);background-size:30px 30px}
+.about-orb{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.25) 0%,transparent 70%);bottom:-50px;right:-50px}
+.afc{position:absolute;background:rgba(4,5,15,0.92);border:1px solid var(--border);border-radius:16px;padding:1.2rem 1.4rem;backdrop-filter:blur(20px)}
+.afc1{top:1.5rem;left:1.5rem;right:1.5rem}
+.afc2{bottom:1.5rem;left:1.5rem;right:1.5rem}
+.afc-lbl{font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.3rem}
+.afc-val{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--white)}
+.about-badge{position:absolute;bottom:-20px;right:-20px;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--bg);padding:1.2rem 1.5rem;border-radius:16px;text-align:center;min-width:130px;box-shadow:0 0 40px rgba(0,212,255,0.4);z-index:2}
+.ab-num{font-family:'Outfit',sans-serif;font-size:2.2rem;font-weight:900;line-height:1}
+.ab-lbl{font-size:0.72rem;font-weight:600;letter-spacing:0.06em;margin-top:2px;opacity:0.8}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:2.5rem 0}
+.stat-box{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:1.2rem 1.4rem;transition:border-color 0.2s,box-shadow 0.2s}
+.stat-box:hover{border-color:var(--cyan);box-shadow:0 0 20px rgba(0,212,255,0.1)}
+.stat-num{font-family:'Outfit',sans-serif;font-size:1.9rem;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--purple2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.stat-lbl{font-size:0.82rem;color:var(--muted);margin-top:0.3rem}
+
+#process{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg3) 100%)}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3.5rem;position:relative}
+.proc-grid::before{content:'';position:absolute;top:28px;left:10%;width:80%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.3),rgba(124,58,237,0.3),transparent)}
+.proc-card{background:var(--glass);border:1px solid var(--border2);border-radius:20px;padding:2rem 1.5rem;transition:border-color 0.3s,box-shadow 0.3s}
+.proc-card:hover{border-color:var(--border);box-shadow:var(--glow)}
+.proc-num{width:56px;height:56px;background:linear-gradient(135deg,var(--cyan),var(--purple2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:800;color:var(--bg);margin-bottom:1.5rem;position:relative;z-index:1;box-shadow:0 0 20px rgba(0,212,255,0.3)}
+.proc-title{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:0.7rem}
+.proc-desc{font-size:0.85rem;color:var(--muted);line-height:1.75}
+
+#ai{background:var(--bg)}
+.ai-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start;margin-top:3rem}
+.ai-list{list-style:none;margin-top:1.5rem}
+.ai-item{display:flex;align-items:flex-start;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--border2);transition:padding-left 0.2s}
+.ai-item:hover{padding-left:0.5rem}
+.ai-icon{width:40px;height:40px;background:var(--glass2);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;margin-top:2px}
+.ai-title{font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:700;color:var(--white);margin-bottom:0.2rem}
+.ai-desc{font-size:0.84rem;color:var(--muted);line-height:1.65}
+.ai-panel{background:var(--bg2);border:1px solid var(--border);border-radius:24px;padding:2rem;box-shadow:var(--glow),var(--glow2);position:relative;overflow:hidden}
+.ai-panel::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(124,58,237,0.2) 0%,transparent 70%)}
+.panel-hdr{font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem}
+.panel-hdr::before{content:'';width:6px;height:6px;background:var(--cyan);border-radius:50%;box-shadow:0 0 8px var(--cyan)}
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;position:relative;z-index:1}
+.tech-node{background:var(--glass);border:1px solid var(--border2);border-radius:14px;padding:1rem 0.8rem;text-align:center;transition:border-color 0.2s,background 0.2s,transform 0.2s;cursor:default}
+.tech-node:hover{border-color:var(--border);background:var(--glass2);transform:translateY(-2px)}
+.tech-icon{font-size:1.4rem;margin-bottom:0.5rem}
+.tech-lbl{font-size:0.7rem;font-weight:500;color:var(--muted);letter-spacing:0.03em}
+
+#contact{background:var(--bg2)}
+.contact-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;margin-top:3.5rem;align-items:start}
+.info-card{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:1.3rem 1.4rem;margin-bottom:0.8rem;display:flex;align-items:flex-start;gap:1rem;transition:border-color 0.2s}
+.info-card:hover{border-color:var(--cyan)}
+.info-icon{width:40px;height:40px;background:var(--glass2);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.info-lbl{font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.3rem}
+.info-val{font-size:0.88rem;color:var(--text);line-height:1.6}
+.cform{display:flex;flex-direction:column;gap:1rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg{display:flex;flex-direction:column;gap:0.4rem}
+.flbl{font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.finput{background:var(--glass);border:1px solid var(--border2);border-radius:12px;padding:0.85rem 1rem;font-family:'Space Grotesk',sans-serif;font-size:0.92rem;color:var(--text);outline:none;transition:border-color 0.2s,box-shadow 0.2s;resize:vertical}
+.finput:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,212,255,0.1)}
+.finput::placeholder{color:var(--muted);opacity:0.5}
+.finput option{background:var(--bg2);color:var(--text)}
+.fbtn{display:inline-flex;align-items:center;gap:0.6rem;background:linear-gradient(135deg,var(--cyan),var(--purple2));color:var(--bg);padding:1rem 2.2rem;border:none;border-radius:100px;font-family:'Outfit',sans-serif;font-size:0.92rem;font-weight:700;cursor:pointer;width:fit-content;box-shadow:0 0 30px rgba(0,212,255,0.25);transition:transform 0.2s,box-shadow 0.2s}
+.fbtn:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(0,212,255,0.4)}
+
+footer{background:var(--bg);border-top:1px solid var(--border);padding:3.5rem 3rem 2rem;position:relative;z-index:1}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid var(--border2)}
+.f-brand{font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:800;color:var(--white);margin-bottom:0.7rem;display:flex;align-items:center;gap:0.5rem}
+.f-brand span{color:var(--cyan);text-shadow:0 0 15px rgba(0,212,255,0.5)}
+.f-tag{font-size:0.86rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem}
+.f-col-title{font-family:'Outfit',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--white);margin-bottom:1.2rem}
+.f-links{list-style:none}
+.f-links li{margin-bottom:0.6rem}
+.f-links a{font-size:0.86rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.f-links a:hover{color:var(--cyan)}
+.f-bottom{padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:rgba(136,146,176,0.4)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-content>*{animation:fadeUp 0.7s ease both}
+.hero-content>*:nth-child(1){animation-delay:0.1s}
+.hero-content>*:nth-child(2){animation-delay:0.25s}
+.hero-content>*:nth-child(3){animation-delay:0.4s}
+.hero-content>*:nth-child(4){animation-delay:0.55s}
+.hero-visual{animation:fadeUp 0.8s 0.3s ease both}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  #hero{grid-template-columns:1fr;padding:6rem 1.5rem 3rem;min-height:auto}
+  .hero-visual{display:none}
+  section{padding:4rem 1.5rem}
+  .svc-grid{grid-template-columns:1fr}
+  .about-layout,.ai-layout,.contact-layout{grid-template-columns:1fr}
+  .about-viz{display:none}
+  .proc-grid{grid-template-columns:1fr 1fr}
+  .proc-grid::before{display:none}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo"><div class="logo-dot"></div>Nexify<span>Webgrip</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#ai">AI Solutions</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-tag"><div class="tag-dot"></div>Mumbai &amp; Gurugram · India</div>
+    <h1 class="hero-title">Build Smarter.<br><span class="grad-text">Scale Faster.</span>With AI.</h1>
+    <p class="hero-sub">We design, develop, and manage cutting-edge web experiences powered by artificial intelligence. From concept to deployment — technology that truly works for you.</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-glow">Explore Services →</a>
+      <a href="#contact" class="btn-outline">Start a Project</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="float-pill fp1"><div class="fpdot"></div>AI Models Live</div>
+    <div class="hero-screen">
+      <div class="screen-bar">
+        <div class="sdot sd1"></div><div class="sdot sd2"></div><div class="sdot sd3"></div>
+        <span class="screen-url">nexifywebgrip.dashboard</span>
+      </div>
+      <div class="metric-row">
+        <div class="mbox"><div class="mval">98%</div><div class="mlbl">Uptime</div></div>
+        <div class="mbox"><div class="mval">0.4s</div><div class="mlbl">Load Time</div></div>
+        <div class="mbox"><div class="mval">A+</div><div class="mlbl">Score</div></div>
+      </div>
+      <div class="code-blk">
+        <span class="ck">const</span> <span class="cf">nexify</span> = <span class="ck">await</span> <span class="cf">AI</span>.init({<br>
+        &nbsp;&nbsp;model: <span class="cs">"nexify-v3"</span>,<br>
+        &nbsp;&nbsp;deploy: <span class="cs">"production"</span>,<br>
+        &nbsp;&nbsp;<span class="cc">// 200+ projects delivered</span><br>
+        });
+      </div>
+    </div>
+    <div class="float-pill fp2"><div class="fpdot"></div>200+ Clients Served</div>
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ti">Web Development</span><span class="ts">◆</span>
+    <span class="ti">AI Integration</span><span class="ts">◆</span>
+    <span class="ti">Web Management</span><span class="ts">◆</span>
+    <span class="ti">UI/UX Design</span><span class="ts">◆</span>
+    <span class="ti">Cloud Solutions</span><span class="ts">◆</span>
+    <span class="ti">Automation</span><span class="ts">◆</span>
+    <span class="ti">SEO &amp; Analytics</span><span class="ts">◆</span>
+    <span class="ti">E-Commerce</span><span class="ts">◆</span>
+    <span class="ti">Web Development</span><span class="ts">◆</span>
+    <span class="ti">AI Integration</span><span class="ts">◆</span>
+    <span class="ti">Web Management</span><span class="ts">◆</span>
+    <span class="ti">UI/UX Design</span><span class="ts">◆</span>
+    <span class="ti">Cloud Solutions</span><span class="ts">◆</span>
+    <span class="ti">Automation</span><span class="ts">◆</span>
+    <span class="ti">SEO &amp; Analytics</span><span class="ts">◆</span>
+    <span class="ti">E-Commerce</span><span class="ts">◆</span>
+  </div>
+</div>
+
+<section id="services">
+  <div class="eyebrow">What We Do</div>
+  <h2 class="sec-title">End-to-End Digital Services</h2>
+  <p class="sec-sub">From startups to enterprises, we craft tailored digital solutions that drive real results.</p>
+  <div class="svc-grid">
+    <div class="svc-card"><div class="svc-num">01</div><div class="svc-icon">🌐</div><div class="svc-title">Web Development</div><p class="svc-desc">High-performance websites and web applications built with modern frameworks. Responsive, accessible, and blazing-fast.</p><span class="svc-arr">↗</span></div>
+    <div class="svc-card"><div class="svc-num">02</div><div class="svc-icon">⚙️</div><div class="svc-title">Web Management</div><p class="svc-desc">Ongoing maintenance, updates, security monitoring, and performance optimization to keep your digital presence sharp.</p><span class="svc-arr">↗</span></div>
+    <div class="svc-card"><div class="svc-num">03</div><div class="svc-icon">🤖</div><div class="svc-title">AI-Led Technology</div><p class="svc-desc">Custom AI integrations — chatbots, recommendation engines, automation workflows — that transform how your business operates.</p><span class="svc-arr">↗</span></div>
+    <div class="svc-card"><div class="svc-num">04</div><div class="svc-icon">🎨</div><div class="svc-title">UI/UX Design</div><p class="svc-desc">User-centric interfaces crafted with precision. Prototypes, design systems, and pixel-perfect implementation.</p><span class="svc-arr">↗</span></div>
+    <div class="svc-card"><div class="svc-num">05</div><div class="svc-icon">☁️</div><div class="svc-title">Cloud &amp; DevOps</div><p class="svc-desc">Scalable cloud infrastructure, CI/CD pipelines, and automated deployments for smooth and reliable operations.</p><span class="svc-arr">↗</span></div>
+    <div class="svc-card"><div class="svc-num">06</div><div class="svc-icon">📊</div><div class="svc-title">Analytics &amp; SEO</div><p class="svc-desc">Data-driven strategies that improve visibility, measure impact, and guide smart business decisions.</p><span class="svc-arr">↗</span></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-layout">
+    <div class="about-viz">
+      <div class="about-box">
+        <div class="about-grid-bg"></div>
+        <div class="about-orb"></div>
+        <div class="afc afc1"><div class="afc-lbl">Headquarters</div><div class="afc-val">Ahuja Tower, Mumbai</div></div>
+        <div class="afc afc2"><div class="afc-lbl">Branch Office</div><div class="afc-val">Udyog Vihar, Gurugram</div></div>
+      </div>
+      <div class="about-badge"><div class="ab-num">25F</div><div class="ab-lbl">Floor 25–26</div></div>
+    </div>
+    <div>
+      <div class="eyebrow">Our Story</div>
+      <h2 class="sec-title">Built in Mumbai.<br>Thinking Global.</h2>
+      <p class="sec-sub">Based at Ahuja Tower in the heart of Mumbai, Nexify Webgrip Services Private Limited was founded with one mission: to make world-class web and AI technology accessible to businesses of every size.</p>
+      <p class="sec-sub" style="margin-top:1rem">We combine deep technical expertise with creative problem-solving to deliver solutions that are not just functional, but transformative. Our team of engineers, designers, and AI specialists is obsessed with quality.</p>
+      <div class="stats-grid">
+        <div class="stat-box"><div class="stat-num">200+</div><div class="stat-lbl">Projects Delivered</div></div>
+        <div class="stat-box"><div class="stat-num">5+</div><div class="stat-lbl">Years Experience</div></div>
+        <div class="stat-box"><div class="stat-num">98%</div><div class="stat-lbl">Client Satisfaction</div></div>
+        <div class="stat-box"><div class="stat-num">24/7</div><div class="stat-lbl">Support Available</div></div>
+      </div>
+      <a href="#contact" class="btn-glow">Work With Us →</a>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="eyebrow">How We Work</div>
+  <h2 class="sec-title">Our Process</h2>
+  <p class="sec-sub">A streamlined, transparent four-step process — from the first conversation to final delivery and long-term growth. No surprises, just results.</p>
+  <div class="proc-grid">
+    <div class="proc-card"><div class="proc-num">01</div><div class="proc-title">Discovery &amp; Strategy</div><p class="proc-desc">We begin with a deep-dive consultation to understand your business goals, target audience, technical requirements, and competitive landscape. This stage produces a clear project brief, timeline, and technology roadmap tailored specifically to your needs — so everyone starts on the same page.</p></div>
+    <div class="proc-card"><div class="proc-num">02</div><div class="proc-title">Design &amp; Prototype</div><p class="proc-desc">Our design team translates strategy into visual reality. We create wireframes, interactive prototypes, and a full design system aligned with your brand. Every screen is reviewed and approved by you before a single line of code is written, ensuring zero surprises later.</p></div>
+    <div class="proc-card"><div class="proc-num">03</div><div class="proc-title">Build &amp; Integrate</div><p class="proc-desc">Development happens in agile sprints with regular demos and checkpoints. We integrate AI models, third-party APIs, and cloud infrastructure while maintaining rigorous code reviews and automated testing at every milestone. You stay informed and in control throughout.</p></div>
+    <div class="proc-card"><div class="proc-num">04</div><div class="proc-title">Launch &amp; Grow</div><p class="proc-desc">Go-live is just the beginning. We handle smooth deployment, provide team training, and set up monitoring dashboards so you can track performance in real time. Post-launch, we offer continuous optimization, feature updates, and 24/7 support to ensure your platform keeps growing.</p></div>
+  </div>
+</section>
+
+<section id="ai">
+  <div class="eyebrow">AI-Powered</div>
+  <h2 class="sec-title">Intelligence at the Core</h2>
+  <div class="ai-layout">
+    <div>
+      <p class="sec-sub">We don't just add AI as an afterthought. We architect solutions where artificial intelligence drives efficiency, personalization, and decision-making from the ground up.</p>
+      <ul class="ai-list">
+        <li class="ai-item"><div class="ai-icon">💬</div><div><div class="ai-title">Conversational AI &amp; Chatbots</div><p class="ai-desc">Intelligent bots trained on your data, capable of handling customer queries, lead generation, and support 24/7.</p></div></li>
+        <li class="ai-item"><div class="ai-icon">🔄</div><div><div class="ai-title">Workflow Automation</div><p class="ai-desc">End-to-end process automation that eliminates repetitive tasks and frees your team for high-value work.</p></div></li>
+        <li class="ai-item"><div class="ai-icon">📈</div><div><div class="ai-title">Predictive Analytics</div><p class="ai-desc">ML models that surface trends and forecasts from your data, enabling smarter business decisions.</p></div></li>
+        <li class="ai-item"><div class="ai-icon">🔍</div><div><div class="ai-title">AI-Enhanced Search &amp; Recommendations</div><p class="ai-desc">Semantic search and personalization engines that deliver the right content to the right user, every time.</p></div></li>
+      </ul>
+    </div>
+    <div class="ai-panel">
+      <div class="panel-hdr">AI Technology Stack</div>
+      <div class="tech-grid">
+        <div class="tech-node"><div class="tech-icon">🧠</div><div class="tech-lbl">LLM APIs</div></div>
+        <div class="tech-node"><div class="tech-icon">🐍</div><div class="tech-lbl">Python / FastAPI</div></div>
+        <div class="tech-node"><div class="tech-icon">⚡</div><div class="tech-lbl">Next.js</div></div>
+        <div class="tech-node"><div class="tech-icon">🗄️</div><div class="tech-lbl">Vector DBs</div></div>
+        <div class="tech-node"><div class="tech-icon">☁️</div><div class="tech-lbl">AWS / GCP</div></div>
+        <div class="tech-node"><div class="tech-icon">🔗</div><div class="tech-lbl">REST &amp; GraphQL</div></div>
+        <div class="tech-node"><div class="tech-icon">📊</div><div class="tech-lbl">Data Pipelines</div></div>
+        <div class="tech-node"><div class="tech-icon">🐳</div><div class="tech-lbl">Docker / K8s</div></div>
+        <div class="tech-node"><div class="tech-icon">🔒</div><div class="tech-lbl">Security &amp; Auth</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="eyebrow">Get In Touch</div>
+  <h2 class="sec-title">Let's Build Something<br>Extraordinary</h2>
+  <div class="contact-layout">
+    <div>
+      <div class="info-card"><div class="info-icon">📍</div><div><div class="info-lbl">Mumbai Office</div><div class="info-val">A26, 27, Floor 25–26, Ahuja Tower<br>Rajabhau Anant Desai Marg<br>Mumbai, Maharashtra 400025, India</div></div></div>
+      <div class="info-card"><div class="info-icon">📍</div><div><div class="info-lbl">Gurugram Office</div><div class="info-val">Plot 46, Phase IV, Udyog Vihar<br>Sector 18, Gurugram, Shahpur<br>Haryana 122015, India</div></div></div>
+      <div class="info-card"><div class="info-icon">📧</div><div><div class="info-lbl">Email</div><div class="info-val">dev@nexifywebgripservicesprivatelimited.com<br>abhishek@nexifywebgripservicesprivatelimited.com</div></div></div>
+      <div class="info-card"><div class="info-icon">📞</div><div><div class="info-lbl">Phone</div><div class="info-val">+91 78381 88283</div></div></div>
+      <div class="info-card"><div class="info-icon">🕐</div><div><div class="info-lbl">Business Hours</div><div class="info-val">Mon – Fri: 9:00 AM – 7:00 PM IST<br>Sat: 10:00 AM – 4:00 PM IST</div></div></div>
+    </div>
+    <form class="cform" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="fg"><label class="flbl">First Name</label><input class="finput" type="text" placeholder="Arjun" required></div>
+        <div class="fg"><label class="flbl">Last Name</label><input class="finput" type="text" placeholder="Sharma"></div>
+      </div>
+      <div class="fg"><label class="flbl">Email Address</label><input class="finput" type="email" placeholder="arjun@company.com" required></div>
+      <div class="fg">
+        <label class="flbl">Service Interested In</label>
+        <select class="finput">
+          <option>Web Development</option>
+          <option>Web Management</option>
+          <option>AI-Led Technology Solutions</option>
+          <option>UI/UX Design</option>
+          <option>Cloud &amp; DevOps</option>
+          <option>Analytics &amp; SEO</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fg"><label class="flbl">Your Message</label><textarea class="finput" rows="5" placeholder="Tell us about your project..."></textarea></div>
+      <button type="submit" class="fbtn">Send Message →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="f-brand"><div class="logo-dot"></div>Nexify<span>Webgrip</span></div>
+      <p class="f-tag">Web development, management &amp; AI-led technology solutions. Based in Mumbai, serving businesses worldwide.</p>
+      <p style="font-size:0.78rem;color:rgba(136,146,176,0.3)">Nexify Webgrip Services Private Limited</p>
+      <p style="font-size:0.75rem;color:rgba(136,146,176,0.25);margin-top:0.3rem">CIN: U62099MH2024PTC436743</p>
+    </div>
+    <div>
+      <div class="f-col-title">Services</div>
+      <ul class="f-links">
+        <li><a href="#services">Web Development</a></li>
+        <li><a href="#services">Web Management</a></li>
+        <li><a href="#ai">AI Solutions</a></li>
+        <li><a href="#services">UI/UX Design</a></li>
+        <li><a href="#services">Cloud &amp; DevOps</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Company</div>
+      <ul class="f-links">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#process">Our Process</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Offices</div>
+      <p style="font-size:0.8rem;line-height:1.8;color:rgba(136,146,176,0.5);margin-bottom:0.8rem">
+        <span style="font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(0,212,255,0.6)">Mumbai</span><br>
+        A26, 27, Floor 25–26, Ahuja Tower<br>Rajabhau Anant Desai Marg, 400025
+      </p>
+      <p style="font-size:0.8rem;line-height:1.8;color:rgba(136,146,176,0.5)">
+        <span style="font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(0,212,255,0.6)">Gurugram</span><br>
+        Plot 46, Phase IV, Udyog Vihar<br>Sector 18, Haryana 122015
+      </p>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span>© 2025 Nexify Webgrip Services Private Limited. All rights reserved.</span>
+    <span>Privacy Policy · Terms of Service</span>
+  </div>
+</footer>
+
+<script>
+function handleSubmit(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.fbtn');
+  btn.textContent='✓ Message Sent!';
+  btn.style.background='linear-gradient(135deg,#00ff88,#00aacc)';
+  setTimeout(()=>{btn.textContent='Send Message →';btn.style.background='';e.target.reset();},3000);
+}
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)'}});
+},{threshold:0.08});
+document.querySelectorAll('.svc-card,.proc-card,.tech-node,.stat-box,.info-card,.ai-item').forEach(el=>{
+  el.style.opacity='0';el.style.transform='translateY(24px)';
+  el.style.transition='opacity 0.5s ease,transform 0.5s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
