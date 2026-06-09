@@ -3,7 +3,7 @@ pipeline {
 
     // ── Tweak these in Jenkins → Pipeline config or here directly ──
     parameters {
-        string(name: 'EC2_HOST', defaultValue: '13.60.88.111', description: 'EC2 public IP / DNS')
+        string(name: 'EC2_HOST', defaultValue: '13.233.104.170', description: 'EC2 public IP / DNS')
         string(name: 'EC2_USER', defaultValue: 'ubuntu',        description: 'SSH user on EC2')
         string(name: 'DEPLOY_DIR', defaultValue: '/home/ubuntu/nexify', description: 'App directory on EC2')
         string(name: 'GIT_REPO', defaultValue: 'https://github.com/shresth111/SHRESTH.git', description: 'Repo to clone on EC2 (first run only)')
