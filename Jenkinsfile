@@ -1,26 +1,54 @@
-stage('Deploy') {
-    steps {
-        sh """
-            set -e
-            DEPLOY_DIR='${params.DEPLOY_DIR}'
-            GIT_REPO='${params.GIT_REPO}'
-            GIT_BRANCH='${params.GIT_BRANCH}'
-
-            : "\${DEPLOY_DIR:?DEPLOY_DIR is empty}"
-            : "\${GIT_REPO:?GIT_REPO is empty}"
-            : "\${GIT_BRANCH:?GIT_BRANCH is empty}"
-
-            if [ ! -d "\$DEPLOY_DIR/.git" ]; then
-                echo "First deploy — cloning repo..."
-                git clone "\$GIT_REPO" "\$DEPLOY_DIR"
-            fi
-            cd "\$DEPLOY_DIR"
-            git fetch origin "\$GIT_BRANCH"
-            git reset --hard "origin/\$GIT_BRANCH"
-            docker compose down || true
-            docker compose up -d --build
-            docker image prune -f || true
-            echo "Nexify deployed successfully!"
-        """
+pipeline {
+    agent any
+    options {
+        timestamps()
+        disableConcurrentBuilds()
+        timeout(time: 15, unit: 'MINUTES')
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+                sh 'echo "Building commit: $(git rev-parse --short HEAD)"'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh '''
+                    set -e
+                    docker compose down || true
+                    docker compose up -d --build
+                    docker image prune -f || true
+                    echo "Nexify deployed successfully!"
+                '''
+            }
+        }
+        stage('Health Check') {
+            steps {
+                sh '''
+                    echo "Waiting for site to come up..."
+                    sleep 5
+                    for i in 1 2 3 4 5; do
+                        code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost || echo 000)
+                        if [ "$code" = "200" ]; then
+                            echo "Site is live (HTTP $code)"
+                            exit 0
+                        fi
+                        echo "Attempt $i: got HTTP $code, retrying..."
+                        sleep 5
+                    done
+                    echo "Health check failed."
+                    exit 1
+                '''
+            }
+        }
+    }
+    post {
+        success {
+            echo "Deploy complete -> http://localhost"
+        }
+        failure {
+            echo "Build/Deploy failed. Check the stage logs above."
+        }
     }
 }
