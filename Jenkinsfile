@@ -1,19 +1,17 @@
 pipeline {
     agent any
 
-    // ── Tweak these in Jenkins → Pipeline config or here directly ──
     parameters {
         string(name: 'EC2_HOST', defaultValue: '13.233.104.170', description: 'EC2 public IP / DNS')
         string(name: 'EC2_USER', defaultValue: 'ubuntu',        description: 'SSH user on EC2')
         string(name: 'DEPLOY_DIR', defaultValue: '/home/ubuntu/nexify', description: 'App directory on EC2')
-        string(name: 'GIT_REPO', defaultValue: 'https://github.com/shresth111/SHRESTH.git', description: 'Repo to clone on EC2 (first run only)')
+        string(name: 'GIT_REPO', defaultValue: 'https://github.com/shresth111/nexify.git', description: 'Repo to clone on EC2 (first run only)')
         string(name: 'GIT_BRANCH', defaultValue: 'main', description: 'Branch to deploy')
     }
 
     environment {
         // Jenkins credential ID for the EC2 .pem private key (type: "SSH Username with private key")
         EC2_SSH_CRED = 'nexify-ec2-key'
-        IMAGE_NAME   = 'nexify-website'
     }
 
     options {
@@ -31,21 +29,10 @@ pipeline {
             }
         }
 
-        stage('Validate Build') {
-            // Builds the image on the Jenkins node to catch Dockerfile errors before touching prod.
-            // Requires Docker on the Jenkins agent. Skip this stage if the agent has no Docker.
-            steps {
-                sh '''
-                    cd nexify-docker
-                    docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} .
-                '''
-            }
-        }
-
         stage('Deploy to EC2') {
             steps {
                 sshagent(credentials: ["${EC2_SSH_CRED}"]) {
-                    // ${VAR} here are expanded by the Jenkins shell (params/env) before being sent over SSH.
+                    // ${VAR} are expanded by the Jenkins shell (params/env) before being sent over SSH.
                     // The closing EOF MUST stay flush-left.
                     sh '''
 ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} bash -s <<EOF
@@ -57,7 +44,6 @@ fi
 cd ${DEPLOY_DIR}
 git fetch origin ${GIT_BRANCH}
 git reset --hard origin/${GIT_BRANCH}
-cd nexify-docker
 docker compose down || true
 docker compose up -d --build
 docker image prune -f || true
@@ -91,13 +77,10 @@ EOF
 
     post {
         success {
-            echo "Deploy complete → http://${params.EC2_HOST}"
+            echo "Deploy complete -> http://${params.EC2_HOST}"
         }
         failure {
             echo "Build/Deploy failed. Check the stage logs above."
-        }
-        always {
-            sh 'docker image prune -f || true'
         }
     }
 }
