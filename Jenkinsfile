@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     parameters {
         string(name: 'EC2_HOST', defaultValue: '13.201.167.57', description: 'EC2 public IP / DNS')
         string(name: 'EC2_USER', defaultValue: 'ubuntu',        description: 'SSH user on EC2')
@@ -8,34 +7,32 @@ pipeline {
         string(name: 'GIT_REPO', defaultValue: 'https://github.com/shresth111/nexify.git', description: 'Repo to clone on EC2 (first run only)')
         string(name: 'GIT_BRANCH', defaultValue: 'main', description: 'Branch to deploy')
     }
-
     environment {
         // Jenkins credential ID for the EC2 .pem private key (type: "SSH Username with private key")
         EC2_SSH_CRED = 'nexify-ec2-key'
     }
-
     options {
         timestamps()
         disableConcurrentBuilds()
         timeout(time: 15, unit: 'MINUTES')
     }
-
     stages {
-
         stage('Checkout') {
             steps {
                 checkout scm
                 sh 'echo "Building commit: $(git rev-parse --short HEAD)"'
             }
         }
-
         stage('Deploy to EC2') {
             steps {
-                sshagent(credentials: ["${EC2_SSH_CRED}"]) {
-                    // ${VAR} are expanded by the Jenkins shell (params/env) before being sent over SSH.
-                    // The closing EOF MUST stay flush-left.
+                withCredentials([sshUserPrivateKey(
+                    credentialsId: "${EC2_SSH_CRED}",
+                    keyFileVariable: 'SSH_KEY'
+                )]) {
+                    // ${VAR} are expanded by the local Jenkins shell (params/env) before being
+                    // sent over SSH. The closing EOF MUST stay flush-left.
                     sh '''
-ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} bash -s <<EOF
+ssh -o StrictHostKeyChecking=no -i "$SSH_KEY" ${EC2_USER}@${EC2_HOST} bash -s <<EOF
 set -e
 if [ ! -d "${DEPLOY_DIR}/.git" ]; then
     echo "First deploy — cloning repo..."
@@ -53,7 +50,6 @@ EOF
                 }
             }
         }
-
         stage('Health Check') {
             steps {
                 sh '''
@@ -74,7 +70,6 @@ EOF
             }
         }
     }
-
     post {
         success {
             echo "Deploy complete -> http://${params.EC2_HOST}"
